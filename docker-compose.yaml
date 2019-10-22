@@ -1,0 +1,47 @@
+version: "3"
+services:
+  onos:
+    image: charlesmcchan/onos:20191022
+    container_name: onos
+    privileged: true
+    environment:
+      - ONOS_APPS=drivers,openflow,segmentrouting,fpm,dhcprelay,routeradvertisement,hostprobingprovider,t3
+    volumes:
+      - "./volume/onos:/root/onos/volume"
+    networks:
+      - mgmt
+    ports:
+      - "8101:8101"
+      - "8181:8181"
+    tty: true
+    stdin_open: true
+    entrypoint: /root/onos/volume/entrypoint.sh
+
+  start_onos:
+    image: stefanevinance/wait-for-200
+    depends_on:
+      - onos
+    environment:
+      - TIMEOUT=120
+      - URL=http://onos:8181/onos/segmentrouting/xconnect --user onos:rocks
+    networks:
+      - mgmt
+
+  mininet:
+    image: charlesmcchan/mn-trellis:20191022
+    container_name: mininet
+    privileged: true
+    depends_on:
+      - start_onos
+    environment:
+      - ONOS_HOSTNAME=onos
+      - TOPO=trellis
+    networks:
+      - mgmt
+    tty: true
+    stdin_open: true
+    entrypoint: /root/entrypoint.sh
+
+networks:
+  mgmt:
+    driver: "bridge"
