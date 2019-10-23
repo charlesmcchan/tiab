@@ -11,8 +11,8 @@ services:
     networks:
       - mgmt
     ports:
-      - "8101:8101"
-      - "8181:8181"
+      - "18101:8101"
+      - "18181:8181"
     tty: true
     stdin_open: true
     entrypoint: /root/onos/volume/entrypoint.sh

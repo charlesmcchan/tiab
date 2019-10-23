@@ -1,13 +1,14 @@
 # Trellis in a Box
 
 Trellis in a Box (TiaB) is a container-based emulated environment.
-It helps spinning up a Trellis test environment, which is perfect for beginners who wants to get some quick hands on experience.
+It helps spinning up a Trellis test environment, which is perfect for beginners who want to get some quick hands on experience.
 
-TiaB consists of two parts: ONOS and Mininet.
-The script will start a single instance ONOS, push corresponding network config, and connect Mininet environment to the controller.
+TiaB consists of two containers: ONOS and Mininet.
+The script will automatically start a single instance ONOS, push corresponding network config, and connect Mininet environment to the controller.
 
 ## Prerequisite
-We assume you have Docker installed in your system. We recommend using Docker >= 18.06
+We assume you have Docker installed in your system. We recommend using Docker >= 18.06.
+For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder list.
 
 ## Quick Start
 
@@ -48,6 +49,8 @@ We assume you have Docker installed in your system. We recommend using Docker >=
     ```
 
 ## Things to Try
+
+### Verify Connectivity (from Mininet CLI)
 
 - Intra-rack ping (bridging)
     ```
