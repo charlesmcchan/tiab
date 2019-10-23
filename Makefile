@@ -4,7 +4,7 @@ ALL:
 	@echo "\033[32m-------------\033[0m"
 	@echo "\033[32mStarting ONOS\033[0m"
 	@echo "\033[32m-------------\033[0m"
-	sudo docker-compose run --rm start_onos
+	sudo -E docker-compose run --rm start_onos
 	@echo "\033[32m----------------\033[0m"
 	@echo "\033[32mStarting Mininet\033[0m"
 	@echo "\033[32m----------------\033[0m"
@@ -24,4 +24,4 @@ mininet:
 	sudo -E docker attach mininet || true
 
 host:
-	sudo docker exec -it mininet /root/m $(HOST)
+	sudo -E docker exec -it mininet /root/m $(HOST)
