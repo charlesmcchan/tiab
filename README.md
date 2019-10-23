@@ -37,6 +37,11 @@ We assume you have Docker installed in your system. We recommend using Docker >=
 
     Caution: Ctrl-D will terminate mininet. Use Ctrl-P then Ctrl-Q to escape
 
+- Attach to a host in Mininet
+    ```
+    make host HOST=h1
+    ```
+
 - Tear down TiaB
     ```
     make clean

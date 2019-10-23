@@ -1,4 +1,4 @@
-.PHONY: clean onos mininet
+.PHONY: clean onos mininet host
 
 ONOS_IP := $(shell sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' onos)
 
@@ -24,3 +24,6 @@ mininet:
 	@echo "\033[31mCtrl-D will terminate mininet. Use Ctrl-P then Ctrl-Q to escape\033[0m"
 	@echo "\033[31m---------------------------------------------------------------\033[0m"
 	sudo docker attach mininet || true
+
+host:
+	sudo docker exec -it mininet /root/m $(HOST)
