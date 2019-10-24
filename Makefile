@@ -1,4 +1,4 @@
-.PHONY: clean onos mininet host
+.PHONY: clean onos mininet host restasrt_mininet
 
 ALL:
 	@echo "\033[32m-------------\033[0m"
@@ -15,6 +15,10 @@ clean:
 
 onos:
 	ssh -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null onos@localhost -p 18101
+
+restart_mininet:
+	sudo -E docker-compose rm -sf mininet
+	sudo -E docker-compose up -d --no-recreate mininet
 
 mininet:
 	@echo "\033[31m---------------------------------------------------------------\033[0m"
