@@ -39,7 +39,7 @@ services:
     env_file:
       - .env
     environment:
-      - CUSTOM_CFG=${CFG_PATH}/${CFG_FILE}
+      - NETCFG=${CFG_PATH}/${CFG_FILE}
     networks:
       - mgmt
     tty: true
