@@ -10,6 +10,8 @@ The script will automatically start a single instance ONOS, push corresponding n
 We assume you have Docker installed in your system. We recommend using Docker >= 18.06.
 For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder list.
 
+Please make sure your user be able to run the docker command or use `sudo` for the folowing commands.
+
 ## Quick Start
 
 - Download TiaB
@@ -41,6 +43,11 @@ For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder lis
 - Attach to a host in Mininet
     ```
     make host HOST=h1
+    ```
+
+- Restart a Mininet
+    ```
+    make restart_mininet
     ```
 
 - Tear down TiaB
@@ -79,7 +86,7 @@ For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder lis
     - `trellis_remote_dhcp`: with remote DHCP server
     - `trellis_hag`: multiple stage fabric. This is the **most complete topology**
 
-    **To use another topology, search for an environment variable `TOPO` in `docker-compose.yaml` and replace it with desired value.**
+    **To use another topology, search for an environment variable `TOPO` in `.env` and replace it with desired value.**
 
     There are another 3 that requires BMV2, and therefore does **not** work in this environment.
     - `trellis_hybrid`
@@ -88,6 +95,13 @@ For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder lis
 
     Double VLAN pop and route is no longer supported with OVS. We have moved forward to implementing that with P4 BNG. Therefore the follow one doesn't work either.
     - `trellis_double_tagged`
+
+- netcfg
+
+    The mininet container will push the `${TOPO}`.json to ONOS controller by default, and you can override this behavior by providing your config file.
+    - Place your file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` file with your file name.
+    - Restart the mininet by the command `make restart_mininet` and then check the log by running `docker logs -f mininet | grep "Check custom config"`
+    - If the file you provided doesn't exist, it will roll back to push the netcfg `${TOPO}`.json to ONOS.
 
 ## Reference
 - [1] [Trellis documentation](https://docs.trellisfabric.org)
