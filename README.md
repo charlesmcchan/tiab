@@ -10,7 +10,7 @@ The script will automatically start a single instance ONOS, push corresponding n
 We assume you have Docker installed in your system. We recommend using Docker >= 18.06.
 For Docker on Mac users, remember to add `tiab/volume/onos` to shared folder list.
 
-Please make sure your user be able to run the docker command or use `sudo` for the folowing commands.
+Please make sure your user be able to run the docker command or use `sudo` for the following commands.
 
 ## Quick Start
 
@@ -98,10 +98,12 @@ Please make sure your user be able to run the docker command or use `sudo` for t
 
 - netcfg
 
-    The mininet container will push the `${TOPO}`.json to ONOS controller by default, and you can override this behavior by providing your config file.
-    - Place your file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` file with your file name.
-    - Restart the mininet by the command `make restart_mininet` and then check the log by running `docker logs -f mininet | grep "Check custom config"`
-    - If the file you provided doesn't exist, it will roll back to push the netcfg `${TOPO}`.json to ONOS.
+    The mininet container will push the netcfg to ONOS controller during the booting up process and the netcfg file comes from two ways.
+    1. Default configuration file, will be `${TOPO}.json`.
+    1. User defined configuration file, refer to thee following steps to override the default behavior.
+      - Place your file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` file with your file name.
+      - Restart the mininet by the command `make restart_mininet` and then check the log by running `docker logs -f mininet | grep "Check custom config"`
+      - If the file you provided doesn't exist or it's invalid file, the mininet container will abort.
 
 ## Reference
 - [1] [Trellis documentation](https://docs.trellisfabric.org)
