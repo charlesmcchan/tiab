@@ -96,14 +96,15 @@ Please make sure your user be able to run the docker command or use `sudo` for t
     Double VLAN pop and route is no longer supported with OVS. We have moved forward to implementing that with P4 BNG. Therefore the follow one doesn't work either.
     - `trellis_double_tagged`
 
-- netcfg
+- Network Configurations (netcfg)
 
-    The mininet container will push the netcfg to ONOS controller during the booting up process and the netcfg file comes from two ways.
-    1. Default configuration file, will be `${TOPO}.json`.
-    1. User defined configuration file, refer to thee following steps to override the default behavior.
-      - Place your file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` file with your file name.
-      - Restart the mininet by the command `make restart_mininet` and then check the log by running `docker logs -f mininet | grep "Check custom config"`
-      - If the file you provided doesn't exist or it's invalid file, the mininet container will abort.
+    The Mininet container will push the netcfg to ONOS controller during the start up process.
+    For each topology `${TOPO}`, a corresponding netcfg `${TOPO}.json` will be loaded by default.
+    We can also provide a customized netcfg to override the default one. It can be done by following steps.
+
+      - Place your netcfg file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` with your netcfg file name.
+      - Restart the Mininet by the command `make restart_mininet`. You can verify whether the customized netcfg is loaded or not by running `docker logs -f mininet | grep "Check custom config"`
+      - If `CFG_FILE` is specified but the file doesn't exist or is invalid, the Mininet container will abort.
 
 ## Reference
 - [1] [Trellis documentation](https://docs.trellisfabric.org)
