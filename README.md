@@ -102,9 +102,9 @@ Please make sure your user be able to run the docker command or use `sudo` for t
     For each topology `${TOPO}`, a corresponding netcfg `${TOPO}.json` will be loaded by default.
     We can also provide a customized netcfg to override the default one. It can be done by following steps.
 
-      - Place your netcfg file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` with your netcfg file name.
-      - Restart the Mininet by the command `make restart_mininet`. You can verify whether the customized netcfg is loaded or not by running `docker logs -f mininet | grep "Check custom config"`
-      - If `CFG_FILE` is specified but the file doesn't exist or is invalid, the Mininet container will abort.
+    - Place your netcfg file under `volume/mininet` and replace the environment variable `CFG_FILE` in `.env` with your netcfg file name.
+    - Restart the Mininet by the command `make restart_mininet`. You can verify whether the customized netcfg is loaded or not by running `docker logs -f mininet | grep "Check custom config"`
+    - If `CFG_FILE` is specified but the file doesn't exist or is invalid, the Mininet container will abort.
 
 ## Reference
 - [1] [Trellis documentation](https://docs.trellisfabric.org)
