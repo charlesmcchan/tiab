@@ -4,6 +4,8 @@ services:
     image: charlesmcchan/onos:20191022
     container_name: onos
     privileged: true
+    env_file:
+      - .env
     environment:
       - ONOS_APPS=drivers,openflow,segmentrouting,fpm,dhcprelay,routeradvertisement,hostprobingprovider,t3
     volumes:
@@ -21,9 +23,8 @@ services:
     image: stefanevinance/wait-for-200
     depends_on:
       - onos
-    environment:
-      - TIMEOUT=120
-      - URL=http://onos:8181/onos/segmentrouting/xconnect --user onos:rocks
+    env_file:
+      - .env
     networks:
       - mgmt
 
@@ -31,11 +32,15 @@ services:
     image: charlesmcchan/mn-trellis:20191022
     container_name: mininet
     privileged: true
+    volumes:
+      - "./volume/mininet:${CFG_PATH}"
     depends_on:
       - start_onos
+    env_file:
+      - .env
     environment:
-      - ONOS_HOSTNAME=onos
-      - TOPO=trellis
+      - EXTERNAL_VOLUME=${CFG_PATH}
+      - NETCFG_FILE=${CFG_FILE}
     networks:
       - mgmt
     tty: true
