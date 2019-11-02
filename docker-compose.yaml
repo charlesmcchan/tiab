@@ -39,7 +39,8 @@ services:
     env_file:
       - .env
     environment:
-      - NETCFG=${CFG_PATH}/${CFG_FILE}
+      - EXTERNAL_VOLUME=${CFG_PATH}
+      - NETCFG_FILE=${CFG_FILE}
     networks:
       - mgmt
     tty: true
