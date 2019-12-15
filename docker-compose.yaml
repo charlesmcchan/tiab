@@ -29,7 +29,7 @@ services:
       - mgmt
 
   mininet:
-    image: charlesmcchan/mn-trellis:20191022
+    image: charlesmcchan/mn-trellis:20191215
     container_name: mininet
     privileged: true
     volumes:
